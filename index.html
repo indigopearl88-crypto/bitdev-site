@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>The BitDev Studio - High-End Web Development &amp; Digital Experiences</title>
+  <meta name="description" content="The BitDev Studio (bitdev.site) - Premium custom web development, visual identity systems, and bespoke digital experiences.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The BitDev Studio">
+  <meta property="og:title" content="The BitDev Studio | Homepage">
+  <meta property="og:description" content="The BitDev Studio (bitdev.site) - Premium custom web development, visual identity systems, and bespoke digital experiences.">
+  <meta property="og:url" content="https://bitdev.site">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The BitDev Studio | Homepage">
+  <meta name="twitter:description" content="The BitDev Studio (bitdev.site) - Premium custom web development, visual identity systems, and bespoke digital experiences.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "The BitDev Studio",
+    "url": "https://bitdev.site",
+    "logo": "https://bitdev.site/favicon.svg",
+    "description": "The BitDev Studio - Premium custom web development, visual identity systems, and bespoke digital experiences across all industries."
+  }
+  </script>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="shortcut icon" href="favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=14.0">
+</head>
+<body>
+
+  <!-- Ask BitDev AI Chatbot Floating Widget -->
+  <div id="bitdev-chatbot-container">
+    <!-- Floating Trigger Button -->
+    <button type="button" id="bitdev-chat-trigger" onclick="toggleBitDevChat(event)" aria-label="Open Ask BitDev AI Chatbot">
+      <div class="chat-trigger-icon-wrap">
+        <svg viewBox="0 0 24 24" class="chat-trigger-icon"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.38-1 1.72V7h2a5 5 0 0 1 5 5v5a3 3 0 0 1-3 3h-1.17l-2.42 2.41A1.5 1.5 0 0 1 11 21.5V20H8a5 5 0 0 1-5-5v-5a5 5 0 0 1 5-5h2V5.72C9.4 5.38 9 4.74 9 4a2 2 0 0 1 2-2zm-3 8a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm6 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>
+        <span class="chat-online-pulse"></span>
+      </div>
+      <span class="chat-trigger-label">Ask BitDev</span>
+    </button>
+
+    <!-- Chatbot Window Popup -->
+    <div id="bitdev-chat-window" class="chat-window-hidden" onclick="event.stopPropagation()">
+      <!-- Header -->
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <div class="chat-header-avatar">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#d2ff00" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <h3 class="chat-title">Ask BitDev</h3>
+            <span class="chat-status"><span class="chat-status-dot"></span> BitDev AI • Online</span>
+          </div>
+        </div>
+        <button type="button" id="bitdev-chat-close" onclick="toggleBitDevChat(event)" aria-label="Close Chat">&times;</button>
+      </div>
+
+      <!-- Chat Body / Messages -->
+      <div id="chat-messages" class="chat-body">
+        <div class="chat-msg bot-msg">
+          <div class="chat-bubble">
+            Hello! 👋 Welcome to <strong>The BitDev Studio</strong>.<br>
+            I'm <strong>Ask BitDev</strong>, your AI assistant. How can we help build your custom website or brand vision today?
+          </div>
+          <span class="chat-timestamp">Just now</span>
+        </div>
+
+        <!-- Quick FAQ Chips -->
+        <div id="chat-faq-chips" class="chat-faq-container">
+          <button type="button" class="faq-chip" onclick="askFAQChip(this, event)" data-question="Can you build custom websites from design inspirations?">💡 Custom websites from design inspiration?</button>
+          <button type="button" class="faq-chip" onclick="askFAQChip(this, event)" data-question="What services does The BitDev Studio offer?">🚀 What services do you offer?</button>
+          <button type="button" class="faq-chip" onclick="askFAQChip(this, event)" data-question="What is your pricing and turnaround time?">💰 Pricing &amp; turnaround time?</button>
+          <button type="button" class="faq-chip" onclick="askFAQChip(this, event)" data-question="Can you build E-Commerce and Mobile Apps?">🛒 E-Commerce &amp; Mobile Apps?</button>
+          <button type="button" class="faq-chip" onclick="askFAQChip(this, event)" data-question="How do I book a consultation meeting?">📅 How do I book a meeting?</button>
+        </div>
+      </div>
+
+      <!-- Chat Footer / Input -->
+      <div class="chat-footer">
+        <form id="chat-input-form" onsubmit="return sendUserChatMessage(event)">
+          <input type="text" id="chat-user-input" placeholder="Ask anything about our services..." autocomplete="off" required>
+          <button type="submit" id="chat-send-btn" aria-label="Send Message">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleBitDevChat(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      const win = document.getElementById('bitdev-chat-window');
+      if (win) {
+        win.classList.toggle('chat-window-hidden');
+        if (!win.classList.contains('chat-window-hidden')) {
+          const input = document.getElementById('chat-user-input');
+          if (input) input.focus();
+        }
+      }
+    }
+
+    function appendChatMessage(sender, text) {
+      const chatMessages = document.getElementById('chat-messages');
+      if (!chatMessages) return;
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'chat-msg ' + sender + '-msg';
+
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      msgDiv.innerHTML = '<div class="chat-bubble">' + text + '</div><span class="chat-timestamp">' + timeStr + '</span>';
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Google Gemini API Key for Real 100% Dynamic Generative AI
+    window.BITDEV_GEMINI_KEY = "AQ.Ab8RN6L7avzFMI_SmrZ4o0CYl3vnZqqEWECMP2itNaMf6hGAag";
+
+    async function handleBotReply(userText) {
+      const text = userText.toLowerCase().trim();
+      let response = "";
+
+      // If Google Gemini API Key is provided, fetch live Generative AI response!
+      if (window.BITDEV_GEMINI_KEY && window.BITDEV_GEMINI_KEY.length > 10) {
+        try {
+          const apiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${window.BITDEV_GEMINI_KEY}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{
+                parts: [{
+                  text: `You are Ask BitDev, the smart AI assistant for The BitDev Studio (bitdev.site), led by Creative Director Hamza Latif. Provide concise, helpful, enthusiastic, professional answers about custom web development, web scraping, data extraction, design inspirations, e-commerce, and pricing ($499-$1,499). User question: "${userText}"`
+                }]
+              }]
+            })
+          });
+          const data = await apiRes.json();
+          if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0] && data.candidates[0].content.parts[0].text) {
+            response = data.candidates[0].content.parts[0].text.replace(/\n/g, '<br>');
+            appendChatMessage('bot', response);
+            return;
+          }
+        } catch (err) {
+          console.warn("Gemini API fallback to local matcher:", err);
+        }
+      }
+
+      // 1. Web Scraping & Data Extraction Queries
+      if (text.includes("scrap") || text.includes("scrape") || text.includes("data") || text.includes("extract") || text.includes("migration") || text.includes("pull")) {
+        response = "Yes, absolutely! 🕷️ At <strong>The BitDev Studio</strong>, we can scrape, extract data, migrate content, or clone existing websites into clean, modern Next.js/HTML architectures. Share your website URL or data requirements here, and senior full-stack developer <strong>Ali Anwar</strong> and our team will analyze it for you!";
+      }
+      // 2. Problem / Issue / Bug Diagnoses
+      else if (text.includes("problem") || text.includes("issue") || text.includes("bug") || text.includes("broken") || text.includes("error") || text.includes("fix") || text.includes("slow")) {
+        response = "We specialize in diagnosing and fixing complex website bugs, speed bottlenecks, responsive layout errors, and database problems! 🛠️ Tell us what issue or error you're facing, and senior developer <strong>Jawad Aamir</strong> & our team will investigate it for you.";
+      }
+      // 3. General Greetings
+      else if (text === "hi" || text === "hello" || text === "hey" || text === "aoa" || text === "assalam o alaikum" || text === "hy") {
+        response = "Hello! 👋 Welcome to <strong>The BitDev Studio</strong>. How can I assist you with your web development, scraping, or design project today?";
+      } 
+      // 4. Open Queries & Help Requests
+      else if (text.includes("query") || text.includes("question") || text.includes("help") || text.includes("can i ask") || text.includes("want to know") || text.includes("tell me") || text.includes("ask")) {
+        response = "I'm all ears! 💡 Please go ahead and ask your question. Whether it's about <strong>web scraping & data extraction</strong>, <strong>custom web engineering</strong>, <strong>design inspirations</strong>, or <strong>pricing ($499-$1,499)</strong>, I'm here to help!";
+      }
+      // 5. Custom Website from Design Inspiration
+      else if (text.includes("inspiration") || text.includes("design") || text.includes("figma") || text.includes("dribbble") || text.includes("clone") || text.includes("custom website") || text.includes("like this") || text.includes("reference") || text.includes("sample")) {
+        response = "Yes, absolutely! 🚀 At <strong>The BitDev Studio</strong>, we specialize in 100% custom web engineering from any design inspiration (Figma, Dribbble, live reference sites, or brand guidelines). If you have a specific design or website link in mind, share it with us and we'll build it pixel-perfect with sub-second loading speed!";
+      }
+      // 6. Website Types & Industries
+      else if (text.includes("real estate") || text.includes("portfolio") || text.includes("agency") || text.includes("corporate") || text.includes("fashion") || text.includes("saas") || text.includes("type") || text.includes("industry") || text.includes("kind of website")) {
+        response = "We build custom high-performance websites across all industries! 🌐<br>• 🏢 <strong>Real Estate & Property Platforms</strong><br>• 🛍️ <strong>E-Commerce & Online Stores</strong><br>• 💼 <strong>Corporate & Business Portfolios</strong><br>• 🎨 <strong>Creative Agency & Studio Sites</strong><br>• ⚡ <strong>SaaS & Web Applications</strong><br><br>Whatever type of website you need, you name it, and we build it for you!";
+      }
+      // 7. E-Commerce & Mobile Apps
+      else if (text.includes("ecommerce") || text.includes("e-commerce") || text.includes("shop") || text.includes("store") || text.includes("app") || text.includes("shopify") || text.includes("payment")) {
+        response = "Yes! We engineer custom E-Commerce storefronts complete with secure payment gateway integrations (Stripe, PayPal, local checkout), product inventory management, and fast mobile-optimized checkout flows designed for high sales volume.";
+      }
+      // 8. Services Offered
+      else if (text.includes("service") || text.includes("offer") || text.includes("do you do") || text.includes("work")) {
+        response = "We provide full-suite digital solutions:<br>• 🌐 <strong>Bespoke Web Engineering</strong> (Custom HTML/JS, Next.js, WebGL 3D)<br>• 🕷️ <strong>Web Scraping & Data Extraction</strong><br>• 🎨 <strong>Visual Identity & Brand Systems</strong> (Logos, Style Guides)<br>• 🛒 <strong>E-Commerce Platforms</strong> (Custom Storefronts, Payment Gateways)<br>• ⚡ <strong>Speed & SEO Optimization</strong>";
+      }
+      // 9. Pricing & Turnaround Time
+      else if (text.includes("price") || text.includes("cost") || text.includes("pricing") || text.includes("how much") || text.includes("package") || text.includes("budget") || text.includes("rate") || text.includes("time") || text.includes("timeline") || text.includes("turnaround") || text.includes("days") || text.includes("weeks")) {
+        response = "Our packages start from <strong>$499/mo</strong> for retainer support, <strong>$799</strong> for Visual Identity Systems, <strong>$999</strong> for Bespoke Web Development, up to <strong>$1,499</strong> for Full Brand & Web Experiences. Most custom website projects are delivered in <strong>1 to 3 weeks</strong> with dedicated developer support!";
+      }
+      // 10. Tech Stack & Speed
+      else if (text.includes("tech") || text.includes("code") || text.includes("wordpress") || text.includes("speed") || text.includes("seo") || text.includes("react") || text.includes("next")) {
+        response = "We write clean, high-speed custom code (HTML5, CSS3, JavaScript, WebGL, Next.js, custom CMS architectures). Our custom sites load in <strong>under 1 second</strong>, score 95+ on Google PageSpeed, and come fully optimized for search engines out of the box!";
+      }
+      // 11. Contact Info / Direct Callback
+      else if (text.includes("meeting") || text.includes("book") || text.includes("call") || text.includes("contact") || text.includes("hire") || text.includes("talk") || text.includes("email") || text.includes("whatsapp") || text.includes("number") || text.includes("@")) {
+        response = "You can book a meeting or request a proposal using the <strong>Get Proposal</strong> button on our site! If you share your <strong>Email or WhatsApp number</strong> right here in the chat, I will forward your details to senior director <strong>Hamza Latif</strong> to contact you within 24 hours! 🚀";
+      }
+      // 12. Conversational Fallback
+      else {
+        response = "I'd love to help you with that! Could you tell me a bit more about what you're looking for? E.g.:<br>• Web scraping & data extraction<br>• Custom website requirements & inspirations<br>• Project budget & timeline<br><br>Or leave your <strong>Email / WhatsApp</strong> and senior director <strong>Hamza Latif</strong> will reach out directly!";
+      }
+
+      setTimeout(function() {
+        appendChatMessage('bot', response);
+      }, 350);
+    }
+
+    function askFAQChip(btn, e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      const q = btn.getAttribute('data-question');
+      appendChatMessage('user', q);
+      handleBotReply(q);
+    }
+
+    function sendUserChatMessage(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      const input = document.getElementById('chat-user-input');
+      if (!input) return false;
+      const text = input.value.trim();
+      if (!text) return false;
+      appendChatMessage('user', text);
+      input.value = '';
+      handleBotReply(text);
+      return false;
+    }
+  </script>
+
+  <!-- Preloader (Disabled for Instant 0ms Load) -->
+  <div id="preloader" style="display: none !important;"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-logo">
+      <a href="#" class="header-brand-link">
+        <svg viewBox="0 0 480 512" style="width: 26px; height: 26px; fill: #ffffff; flex-shrink: 0;"><path d="M471.99 334.43L336.06 256l135.93-78.43c7.66-4.42 10.28-14.2 5.86-21.86l-32.02-55.43c-4.42-7.65-14.21-10.28-21.87-5.86l-135.93 78.43V16c0-8.84-7.17-16-16.01-16h-64.04c-8.84 0-16.01 7.16-16.01 16v156.86L56.04 94.43c-7.66-4.42-17.45-1.79-21.87 5.86L2.15 155.71c-4.42 7.65-1.8 17.44 5.86 21.86L143.94 256 8.01 334.43c-7.66 4.42-10.28 14.21-5.86 21.86l32.02 55.43c4.42 7.65 14.21 10.27 21.87 5.86l135.93-78.43V496c0 8.84 7.17 16 16.01 16h64.04c8.84 0 16.01-7.16 16.01-16V339.14l135.93 78.43c7.66 4.42 17.45 1.8 21.87-5.86l32.02-55.43c4.42-7.65 1.8-17.43-5.86-21.85z"/></svg>
+        <span class="header-brand-title">BitDev</span>
+      </a>
+    </div>
+
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#works">Projects</a></li>
+        <li><a href="#contacts">Contacts</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contacts">Book a Meeting</a></li>
+      </ul>
+    </nav>
+
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <a href="#contacts" class="btn-proposal">Get proposal</a>
+      <button class="elementor-menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
+        <svg viewBox="0 0 1000 1000">
+          <path d="M104 333H896C929 333 958 304 958 271S929 208 896 208H104C71 208 42 237 42 271S71 333 104 333ZM104 583H896C929 583 958 554 958 521S929 458 896 458H104C71 458 42 487 42 521S71 583 104 583ZM104 833H896C929 833 958 804 958 771S929 708 896 708H104C71 708 42 737 42 771S71 833 104 833Z"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="elementor-nav-menu--dropdown">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#works">Projects</a></li>
+        <li><a href="#contacts">Contacts</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contacts">Book a Meeting</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero Section (WebGL 2 Interactive Canvas Scene) -->
+  <section id="scene">
+    <canvas id="c"></canvas>
+    <a href="#clients" class="hint">Scroll down</a>
+  </section>
+
+  <!-- Section: Our Clients -->
+  <section class="section-dark" id="clients">
+    <div class="container-inner">
+      <div class="section-header">
+        <svg class="star-icon" viewBox="0 0 480 512">
+          <path d="M471.99 334.43L336.06 256l135.93-78.43c7.66-4.42 10.28-14.2 5.86-21.86l-32.02-55.43c-4.42-7.65-14.21-10.28-21.87-5.86l-135.93 78.43V16c0-8.84-7.17-16-16.01-16h-64.04c-8.84 0-16.01 7.16-16.01 16v156.86L56.04 94.43c-7.66-4.42-17.45-1.79-21.87 5.86L2.15 155.71c-4.42 7.65-1.8 17.44 5.86 21.86L143.94 256 8.01 334.43c-7.66 4.42-10.28 14.21-5.86 21.86l32.02 55.43c4.42 7.65 14.21 10.27 21.87 5.86l135.93-78.43V496c0 8.84 7.17 16 16.01 16h64.04c8.84 0 16.01-7.16 16.01-16V339.14l135.93 78.43c7.66 4.42 17.45 1.8 21.87-5.86l32.02-55.43c4.42-7.65 1.8-17.43-5.86-21.85z"/>
+        </svg>
+        <span class="section-subtitle">Our clients</span>
+      </div>
+
+      <div class="logo-marquee-track">
+        <div class="logo-marquee-wrapper">
+          <!-- Set 1 -->
+          <div class="logo-marquee-item"><a href="#"><img src="assets/client_logo1.png" alt="Hexagon Logo"></a></div>
+          <div class="logo-marquee-item"><a href="#"><img src="assets/client_logo2.png" class="logo-invert" alt="GM Logo"></a></div>
+          <div class="logo-marquee-item"><a href="#"><img src="assets/client_logo4.png" class="logo-invert" alt="BB&G Briskman Logo"></a></div>
+          <div class="logo-marquee-item"><a href="#"><img src="assets/client_logo3.png" class="logo-invert" alt="MK Martha King Logo"></a></div>
+          <div class="logo-marquee-item"><a href="#"><img src="assets/client_logo5.png" class="logo-invert" alt="Target Logo"></a></div>
+          <div class="logo-marquee-item"><a href="#"><img src="assets/client_logo6.png" class="logo-invert" alt="LA Logo"></a></div>
+
+          <!-- Set 2 (Duplicate for Seamless Loop) -->
+          <div class="logo-marquee-item"><a href="#"><img src="assets/client_logo1.png" alt="Hexagon Logo"></a></div>
+          <div class="logo-marquee-item"><a href="#"><img src="assets/client_logo2.png" class="logo-invert" alt="GM Logo"></a></div>
+          <div class="logo-marquee-item"><a href="#"><img src="assets/client_logo4.png" class="logo-invert" alt="BB&G Briskman Logo"></a></div>
+          <div class="logo-marquee-item"><a href="#"><img src="assets/client_logo3.png" class="logo-invert" alt="MK Martha King Logo"></a></div>
+          <div class="logo-marquee-item"><a href="#"><img src="assets/client_logo5.png" class="logo-invert" alt="Target Logo"></a></div>
+          <div class="logo-marquee-item"><a href="#"><img src="assets/client_logo6.png" class="logo-invert" alt="LA Logo"></a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Our Portfolio (Projects) -->
+  <section class="section-light" id="works">
+    <div class="container-inner">
+      <div class="section-header">
+        <svg class="star-icon" viewBox="0 0 480 512"><path d="M471.99 334.43L336.06 256l135.93-78.43c7.66-4.42 10.28-14.2 5.86-21.86l-32.02-55.43c-4.42-7.65-14.21-10.28-21.87-5.86l-135.93 78.43V16c0-8.84-7.17-16-16.01-16h-64.04c-8.84 0-16.01 7.16-16.01 16v156.86L56.04 94.43c-7.66-4.42-17.45-1.79-21.87 5.86L2.15 155.71c-4.42 7.65-1.8 17.44 5.86 21.86L143.94 256 8.01 334.43c-7.66 4.42-10.28 14.21-5.86 21.86l32.02 55.43c4.42 7.65 14.21 10.27 21.87 5.86l135.93-78.43V496c0 8.84 7.17 16 16.01 16h64.04c8.84 0 16.01-7.16 16.01-16V339.14l135.93 78.43c7.66 4.42 17.45 1.8 21.87-5.86l32.02-55.43c4.42-7.65 1.8-17.43-5.86-21.85z"/></svg>
+        <span class="section-subtitle">Our Portfolio</span>
+      </div>
+      <h2 class="section-title">Projects</h2>
+      <p style="font-size: 18px; color: #555555; max-width: 700px;">Our studio has successfully assisted businesses from various sectors in reaching their objectives. Below are highlights of some of our recent projects.</p>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <a class="project-card" href="https://www.briskmanandbriskman.com/" target="_blank" rel="noopener noreferrer">
+          <div class="project-image-wrapper">
+            <img src="assets/project1.jpg" alt="BRISKMAN & BRISKMAN">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">BRISKMAN &amp; BRISKMAN</h3>
+          </div>
+        </a>
+        <!-- Project 2 -->
+        <a class="project-card" href="https://www.gm.com/innovation/autonomous-driving" target="_blank" rel="noopener noreferrer">
+          <div class="project-image-wrapper">
+            <img src="assets/project2.jpg" alt="GM AUTONOMOUS DRIVING">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">GM AUTONOMOUS DRIVING</h3>
+          </div>
+        </a>
+        <!-- Project 3 -->
+        <a class="project-card" href="https://www.theluxuryhomeshow.com/" target="_blank" rel="noopener noreferrer">
+          <div class="project-image-wrapper">
+            <img src="assets/project3.jpg" alt="THE LUXURY HOME SHOW">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">THE LUXURY HOME SHOW</h3>
+          </div>
+        </a>
+        <!-- Project 4 -->
+        <a class="project-card" href="https://www.marthakingtravel.com/" target="_blank" rel="noopener noreferrer">
+          <div class="project-image-wrapper">
+            <img src="assets/project4.jpg" alt="MARTHA KING TRAVEL">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">MARTHA KING TRAVEL</h3>
+          </div>
+        </a>
+        <!-- Project 5 -->
+        <a class="project-card" href="https://fluid.glass/" target="_blank" rel="noopener noreferrer">
+          <div class="project-image-wrapper">
+            <img src="assets/project5.jpg" alt="FLUID GLASS">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">FLUID GLASS</h3>
+          </div>
+        </a>
+        <!-- Project 6 -->
+        <a class="project-card" href="https://www.viamaster-intl.com/" target="_blank" rel="noopener noreferrer">
+          <div class="project-image-wrapper">
+            <img src="assets/project6.jpg" alt="VIAMASTER INTERNATIONAL">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">VIAMASTER INTERNATIONAL</h3>
+          </div>
+        </a>
+      </div>
+
+      <div class="load-more-container">
+        <button class="btn-load-more">Load More</button>
+      </div>
+    </div>
+  <!-- Section: Why Choose Us (Statistics) -->
+  <section class="section-light" style="padding-top: 40px;">
+    <div class="container-inner">
+      <div class="section-header">
+        <svg class="star-icon" viewBox="0 0 480 512"><path d="M471.99 334.43L336.06 256l135.93-78.43c7.66-4.42 10.28-14.2 5.86-21.86l-32.02-55.43c-4.42-7.65-14.21-10.28-21.87-5.86l-135.93 78.43V16c0-8.84-7.17-16-16.01-16h-64.04c-8.84 0-16.01 7.16-16.01 16v156.86L56.04 94.43c-7.66-4.42-17.45-1.79-21.87 5.86L2.15 155.71c-4.42 7.65-1.8 17.44 5.86 21.86L143.94 256 8.01 334.43c-7.66 4.42-10.28 14.21-5.86 21.86l32.02 55.43c4.42 7.65 14.21 10.27 21.87 5.86l135.93-78.43V496c0 8.84 7.17 16 16.01 16h64.04c8.84 0 16.01-7.16 16.01-16V339.14l135.93 78.43c7.66 4.42 17.45 1.8 21.87-5.86l32.02-55.43c4.42-7.65 1.8-17.43-5.86-21.85z"/></svg>
+        <span class="section-subtitle">Why choose us</span>
+      </div>
+      <h2 class="section-title">Data-driven web engineering, <span style="color: #808080;">crafted for brand authority &amp; high conversions.</span></h2>
+
+      <div class="stats-grid">
+        <div class="stat-card" data-tilt>
+          <div class="stat-number" data-target="88" data-prefix="" data-suffix="%">0%</div>
+          <p class="stat-text">88% of online users are less likely to return to a website after a bad user experience.</p>
+        </div>
+        <div class="stat-card" data-tilt>
+          <div class="stat-number" data-target="94" data-prefix="" data-suffix="%">0%</div>
+          <p class="stat-text">94% of a visitor's initial brand impression is directly driven by web UI design quality.</p>
+        </div>
+        <div class="stat-card" data-tilt>
+          <div class="stat-number" data-target="80" data-prefix="+" data-suffix="%">+0%</div>
+          <p class="stat-text">Brand recognition and trust increase by up to +80% with bespoke visual consistency.</p>
+        </div>
+        <div class="stat-card" data-tilt>
+          <div class="stat-number" data-target="35" data-prefix="+" data-suffix="%">+0%</div>
+          <p class="stat-text">Average lead conversion increase achieved for client platforms.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Services Accordion -->
+  <section class="section-light" id="services">
+    <div class="container-inner">
+      <div class="section-header">
+        <svg class="star-icon" viewBox="0 0 480 512"><path d="M471.99 334.43L336.06 256l135.93-78.43c7.66-4.42 10.28-14.2 5.86-21.86l-32.02-55.43c-4.42-7.65-14.21-10.28-21.87-5.86l-135.93 78.43V16c0-8.84-7.17-16-16.01-16h-64.04c-8.84 0-16.01 7.16-16.01 16v156.86L56.04 94.43c-7.66-4.42-17.45-1.79-21.87 5.86L2.15 155.71c-4.42 7.65-1.8 17.44 5.86 21.86L143.94 256 8.01 334.43c-7.66 4.42-10.28 14.21-5.86 21.86l32.02 55.43c4.42 7.65 14.21 10.27 21.87 5.86l135.93-78.43V496c0 8.84 7.17 16 16.01 16h64.04c8.84 0 16.01-7.16 16.01-16V339.14l135.93 78.43c7.66 4.42 17.45 1.8 21.87-5.86l32.02-55.43c4.42-7.65 1.8-17.43-5.86-21.85z"/></svg>
+        <span class="section-subtitle">What can we offer</span>
+      </div>
+      <h2 class="section-title">Services</h2>
+
+      <div class="services-accordion">
+        <!-- Item 1 (Default Expanded) -->
+        <details class="e-n-accordion-item" open>
+          <summary class="e-n-accordion-item-title">
+            <span>Full Brand &amp; Website Experience</span>
+            <span class="e-n-accordion-item-title-icon">
+              <span class="e-opened">-</span>
+              <span class="e-closed">+</span>
+            </span>
+          </summary>
+          <div class="accordion-content">
+            <p class="accordion-description">Complete end-to-end transformation for ambitious brands. From custom brand strategy and visual identity to high-performance custom web application development.</p>
+            <div>
+              <h4 style="margin-bottom: 10px; font-size: 14px; color: #808080;">What’s included</h4>
+              <div class="included-tags">
+                <span class="tag-btn">Custom UI/UX Design</span>
+                <span class="tag-btn">Brand Identity System</span>
+                <span class="tag-btn">Full Web Application</span>
+                <span class="tag-btn">WebGL Micro-Animations</span>
+                <span class="tag-btn">SEO &amp; Speed Optimization</span>
+                <span class="tag-btn">Mobile Responsive</span>
+                <span class="tag-btn">CMS Integration</span>
+              </div>
+            </div>
+            <div class="pricing-row">
+              <span class="pricing-text">from $1,499</span>
+              <a href="#contacts" class="btn-proposal">Get proposal</a>
+            </div>
+          </div>
+        </details>
+
+        <!-- Item 2 -->
+        <details class="e-n-accordion-item">
+          <summary class="e-n-accordion-item-title">
+            <span>Bespoke Web Engineering &amp; Development</span>
+            <span class="e-n-accordion-item-title-icon">
+              <span class="e-opened">-</span>
+              <span class="e-closed">+</span>
+            </span>
+          </summary>
+          <div class="accordion-content">
+            <p class="accordion-description">Tailor-made, high-speed custom web development built from the ground up for maximum conversion, bulletproof security, and sub-second load times.</p>
+            <div>
+              <h4 style="margin-bottom: 10px; font-size: 14px; color: #808080;">What’s included</h4>
+              <div class="included-tags">
+                <span class="tag-btn">Custom HTML5 / JS</span>
+                <span class="tag-btn">Tailored CMS Architecture</span>
+                <span class="tag-btn">API Integrations</span>
+                <span class="tag-btn">Sub-Second Load Speed</span>
+                <span class="tag-btn">Mobile First UX</span>
+                <span class="tag-btn">24/7 Tech Support</span>
+              </div>
+            </div>
+            <div class="pricing-row">
+              <span class="pricing-text">from $999</span>
+              <a href="#contacts" class="btn-proposal">Get proposal</a>
+            </div>
+          </div>
+        </details>
+
+        <!-- Item 3 -->
+        <details class="e-n-accordion-item">
+          <summary class="e-n-accordion-item-title">
+            <span>Visual Identity &amp; Brand System</span>
+            <span class="e-n-accordion-item-title-icon">
+              <span class="e-opened">-</span>
+              <span class="e-closed">+</span>
+            </span>
+          </summary>
+          <div class="accordion-content">
+            <p class="accordion-description">A comprehensive, digitally-optimized brand identity system engineered to elevate your business presence across all web and social touchpoints.</p>
+            <div>
+              <h4 style="margin-bottom: 10px; font-size: 14px; color: #808080;">What’s included</h4>
+              <div class="included-tags">
+                <span class="tag-btn">Logo System</span>
+                <span class="tag-btn">Typography &amp; Fonts</span>
+                <span class="tag-btn">Color Palette</span>
+                <span class="tag-btn">Brand Style Guide</span>
+                <span class="tag-btn">Social Media Assets</span>
+                <span class="tag-btn">Marketing Kits</span>
+              </div>
+            </div>
+            <div class="pricing-row">
+              <span class="pricing-text">from $799</span>
+              <a href="#contacts" class="btn-proposal">Get started</a>
+            </div>
+          </div>
+        </details>
+
+        <!-- Item 4 -->
+        <details class="e-n-accordion-item">
+          <summary class="e-n-accordion-item-title">
+            <span>E-Commerce &amp; Digital Commerce Platform</span>
+            <span class="e-n-accordion-item-title-icon">
+              <span class="e-opened">-</span>
+              <span class="e-closed">+</span>
+            </span>
+          </summary>
+          <div class="accordion-content">
+            <p class="accordion-description">High-converting digital storefronts and e-commerce platforms engineered for seamless checkout experiences, payment gateway integration, and high sales volume.</p>
+            <div>
+              <h4 style="margin-bottom: 10px; font-size: 14px; color: #808080;">What’s included</h4>
+              <div class="included-tags">
+                <span class="tag-btn">Custom Storefront</span>
+                <span class="tag-btn">Payment Gateways</span>
+                <span class="tag-btn">Inventory Management</span>
+                <span class="tag-btn">Conversion UX</span>
+                <span class="tag-btn">Mobile Checkout</span>
+                <span class="tag-btn">Analytics &amp; Tracking</span>
+              </div>
+            </div>
+            <div class="pricing-row">
+              <span class="pricing-text">from $1,299</span>
+              <a href="#contacts" class="btn-proposal">Get proposal</a>
+            </div>
+          </div>
+        </details>
+
+        <!-- Item 5 -->
+        <details class="e-n-accordion-item">
+          <summary class="e-n-accordion-item-title">
+            <span>Creative Retainer &amp; Continuous Support</span>
+            <span class="e-n-accordion-item-title-icon">
+              <span class="e-opened">-</span>
+              <span class="e-closed">+</span>
+            </span>
+          </summary>
+          <div class="accordion-content">
+            <p class="accordion-description">Ongoing creative direction, monthly feature upgrades, security maintenance, and dedicated developer support to keep your web platform leading the industry.</p>
+            <div>
+              <h4 style="margin-bottom: 10px; font-size: 14px; color: #808080;">What’s included</h4>
+              <div class="included-tags">
+                <span class="tag-btn">Dedicated Developer</span>
+                <span class="tag-btn">Monthly UI Updates</span>
+                <span class="tag-btn">Speed &amp; Security Audits</span>
+                <span class="tag-btn">Priority Support</span>
+                <span class="tag-btn">A/B Testing</span>
+                <span class="tag-btn">Performance Monitoring</span>
+              </div>
+            </div>
+            <div class="pricing-row">
+              <span class="pricing-text">from $499 / mo</span>
+              <a href="#contacts" class="btn-proposal">Get proposal</a>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Our Work Process (Interactive Circle Wheel) -->
+  <section class="section-light" id="process" style="padding: 100px 0;">
+    <div class="container-inner">
+      <div class="section-header">
+        <svg class="star-icon" viewBox="0 0 480 512"><path d="M471.99 334.43L336.06 256l135.93-78.43c7.66-4.42 10.28-14.2 5.86-21.86l-32.02-55.43c-4.42-7.65-14.21-10.28-21.87-5.86l-135.93 78.43V16c0-8.84-7.17-16-16.01-16h-64.04c-8.84 0-16.01 7.16-16.01 16v156.86L56.04 94.43c-7.66-4.42-17.45-1.79-21.87 5.86L2.15 155.71c-4.42 7.65-1.8 17.44 5.86 21.86L143.94 256 8.01 334.43c-7.66 4.42-10.28 14.21-5.86 21.86l32.02 55.43c4.42 7.65 14.21 10.27 21.87 5.86l135.93-78.43V496c0 8.84 7.17 16 16.01 16h64.04c8.84 0 16.01-7.16 16.01-16V339.14l135.93 78.43c7.66 4.42 17.45 1.8 21.87-5.86l32.02-55.43c4.42-7.65 1.8-17.43-5.86-21.85z"/></svg>
+        <span class="section-subtitle">Our work process</span>
+      </div>
+      <h2 class="section-title">Fast &amp; reliable, <span style="color: #808080;">focused on premium client service</span></h2>
+
+      <div class="process-wheel-section">
+        <div class="process-wheel-ring">
+          <!-- Central text display -->
+          <div class="process-wheel-center">
+            <p id="process-center-text">We translate the identity into a premium digital experience with intentional UX flows and clean, editorial interfaces.</p>
+          </div>
+
+          <!-- 6 Radial Circular Nodes -->
+          <button class="wheel-node pos-1" data-index="0">
+            <span>1. Discovery &amp; Strategy</span>
+          </button>
+          <button class="wheel-node pos-2" data-index="1">
+            <span>2. Creative Direction</span>
+          </button>
+          <button class="wheel-node pos-3" data-index="2">
+            <span>3. Identity Design</span>
+          </button>
+          <button class="wheel-node pos-4" data-index="3">
+            <span>4. UX &amp; UI Design</span>
+          </button>
+          <button class="wheel-node pos-5" data-index="4">
+            <span>5. Full Development</span>
+          </button>
+          <button class="wheel-node pos-6" data-index="5">
+            <span>6. Launch &amp; Support</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Testimonials -->
+  <section class="section-light" id="testimonials">
+    <div class="container-inner">
+      <div class="section-header">
+        <svg class="star-icon" viewBox="0 0 480 512"><path d="M471.99 334.43L336.06 256l135.93-78.43c7.66-4.42 10.28-14.2 5.86-21.86l-32.02-55.43c-4.42-7.65-14.21-10.28-21.87-5.86l-135.93 78.43V16c0-8.84-7.17-16-16.01-16h-64.04c-8.84 0-16.01 7.16-16.01 16v156.86L56.04 94.43c-7.66-4.42-17.45-1.79-21.87 5.86L2.15 155.71c-4.42 7.65-1.8 17.44 5.86 21.86L143.94 256 8.01 334.43c-7.66 4.42-10.28 14.21-5.86 21.86l32.02 55.43c4.42 7.65 14.21 10.27 21.87 5.86l135.93-78.43V496c0 8.84 7.17 16 16.01 16h64.04c8.84 0 16.01-7.16 16.01-16V339.14l135.93 78.43c7.66 4.42 17.45 1.8 21.87-5.86l32.02-55.43c4.42-7.65 1.8-17.43-5.86-21.85z"/></svg>
+        <span class="section-subtitle">Testimonials</span>
+      </div>
+      <h2 class="section-title">Experiences</h2>
+
+      <div class="testimonials-marquee-track">
+        <div class="testimonials-marquee-wrapper">
+          <!-- Set 1 -->
+          <div class="testimonial-card">
+            <div class="testimonial-user-row">
+              <img src="https://i0.wp.com/visualidentity.studio/wp-content/uploads/2025/11/Andrius.webp?w=800&ssl=1" alt="Andrius Jancevičius" class="testimonial-avatar">
+              <div>
+                <h3 class="testimonial-user">Andrius Jancevičius</h3>
+                <p class="testimonial-company">AQUAFILTER.LT</p>
+              </div>
+            </div>
+            <div class="star-rating">★★★★★</div>
+            <p class="testimonial-quote">Working with BitDev was an absolute game changer for us. They turned our vision into an ultra-fast, modern website that instantly elevated our brand credibility. Exceptional speed, communication, and execution!</p>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-user-row">
+              <img src="https://i0.wp.com/visualidentity.studio/wp-content/uploads/2025/11/Ieva.webp?w=800&ssl=1" alt="Ieva Gelažanskaitė" class="testimonial-avatar">
+              <div>
+                <h3 class="testimonial-user">Ieva Gelažanskaitė</h3>
+                <p class="testimonial-company">ID CLINIC &amp; VitaminSea</p>
+              </div>
+            </div>
+            <div class="star-rating">★★★★★</div>
+            <p class="testimonial-quote">We highly recommend BitDev Studio for custom web development. They built our bespoke platform with incredible attention to detail, smooth animations, and top-tier UI. The entire process was seamless and professional.</p>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-user-row">
+              <img src="https://i0.wp.com/visualidentity.studio/wp-content/uploads/2025/11/Grita-e1763584027132.jpg?w=800&ssl=1" alt="Grita Saukaitytė" class="testimonial-avatar">
+              <div>
+                <h3 class="testimonial-user">Grita Saukaitytė</h3>
+                <p class="testimonial-company">Apvalaus Kvadrato Mokykla</p>
+              </div>
+            </div>
+            <div class="star-rating">★★★★★</div>
+            <p class="testimonial-quote">We are beyond thrilled with the website designed by BitDev. They listened to all our needs, crafted a stunning modern aesthetic, and delivered ahead of schedule. Truly a 5-star partner! 🙂</p>
+          </div>
+
+          <!-- Set 2 (Duplicate for Seamless Infinite Marquee Loop) -->
+          <div class="testimonial-card">
+            <div class="testimonial-user-row">
+              <img src="https://i0.wp.com/visualidentity.studio/wp-content/uploads/2025/11/Andrius.webp?w=800&ssl=1" alt="Andrius Jancevičius" class="testimonial-avatar">
+              <div>
+                <h3 class="testimonial-user">Andrius Jancevičius</h3>
+                <p class="testimonial-company">AQUAFILTER.LT</p>
+              </div>
+            </div>
+            <div class="star-rating">★★★★★</div>
+            <p class="testimonial-quote">Working with BitDev was an absolute game changer for us. They turned our vision into an ultra-fast, modern website that instantly elevated our brand credibility. Exceptional speed, communication, and execution!</p>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-user-row">
+              <img src="https://i0.wp.com/visualidentity.studio/wp-content/uploads/2025/11/Ieva.webp?w=800&ssl=1" alt="Ieva Gelažanskaitė" class="testimonial-avatar">
+              <div>
+                <h3 class="testimonial-user">Ieva Gelažanskaitė</h3>
+                <p class="testimonial-company">ID CLINIC &amp; VitaminSea</p>
+              </div>
+            </div>
+            <div class="star-rating">★★★★★</div>
+            <p class="testimonial-quote">We highly recommend BitDev Studio for custom web development. They built our bespoke platform with incredible attention to detail, smooth animations, and top-tier UI. The entire process was seamless and professional.</p>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-user-row">
+              <img src="https://i0.wp.com/visualidentity.studio/wp-content/uploads/2025/11/Grita-e1763584027132.jpg?w=800&ssl=1" alt="Grita Saukaitytė" class="testimonial-avatar">
+              <div>
+                <h3 class="testimonial-user">Grita Saukaitytė</h3>
+                <p class="testimonial-company">Apvalaus Kvadrato Mokykla</p>
+              </div>
+            </div>
+            <div class="star-rating">★★★★★</div>
+            <p class="testimonial-quote">We are beyond thrilled with the website designed by BitDev. They listened to all our needs, crafted a stunning modern aesthetic, and delivered ahead of schedule. Truly a 5-star partner! 🙂</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Client Voices / Experiences (Angled Card Deck Showcase) -->
+  <section class="section-light client-voices-section" id="experiences">
+    <!-- Laser line background decoration -->
+    <div class="laser-lines-bg"></div>
+
+    <div class="container-inner" style="position: relative; z-index: 2;">
+      <!-- Pill Badge -->
+      <div class="client-voices-badge">
+        <span class="live-dot"></span>
+        <span>CLIENT VOICES</span>
+      </div>
+
+      <!-- Serif Main Headline -->
+      <h2 class="client-voices-headline">Where ambitious brands<br>build their digital future</h2>
+
+      <!-- 3D Fan / Tilted Deck Grid -->
+      <div class="cards-deck-container">
+        <!-- Card 1: Left Tilted -->
+        <div class="deck-card card-left">
+          <div class="card-bg-blur" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80');"></div>
+          <div class="card-content">
+            <div class="card-avatar-wrapper">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Daniel Carter">
+            </div>
+            <p class="card-quote">“BitDev transformed our brand and website into a powerful, high-converting growth engine.”</p>
+            <div class="card-author">
+              <h4 class="author-name">Daniel Carter</h4>
+              <p class="author-title">Founder &amp; CEO, NovaTech</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Center Elevated -->
+        <div class="deck-card card-center">
+          <div class="card-bg-blur" style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80');"></div>
+          <div class="card-content">
+            <div class="card-avatar-wrapper">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Sarah Jenkins">
+            </div>
+            <p class="card-quote">“Their UI strategy and web engineering elevated our entire digital product experience.”</p>
+            <div class="card-author">
+              <h4 class="author-name">Sarah Jenkins</h4>
+              <p class="author-title">Product Director, Lumina Labs</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Right Tilted -->
+        <div class="deck-card card-right">
+          <div class="card-bg-blur" style="background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80');"></div>
+          <div class="card-content">
+            <div class="card-avatar-wrapper">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80" alt="Marcus Rivera">
+            </div>
+            <p class="card-quote">“BitDev delivered our custom platform ahead of schedule with flawless precision and style.”</p>
+            <div class="card-author">
+              <h4 class="author-name">Marcus Rivera</h4>
+              <p class="author-title">VP of Marketing, Horizon Collective</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Metrics Counter Row -->
+      <div class="deck-metrics-row">
+        <div class="metric-item">
+          <span class="metric-val"><span class="metric-num" data-target="54">0</span> <span class="metric-plus">+</span></span>
+          <span class="metric-lbl">Projects Delivered</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-item">
+          <span class="metric-val"><span class="metric-num" data-target="96">0</span> <span class="metric-percent">%</span></span>
+          <span class="metric-lbl">Industries Impacted</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-item">
+          <span class="metric-val"><span class="metric-num" data-target="5">0</span> <span class="metric-plus">+</span></span>
+          <span class="metric-lbl">Years of Experience</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: About Us -->
+  <section class="section-dark" id="about">
+    <div class="container-inner">
+      <h2 class="section-title">The faces <span style="color: #808080;">behind the projects</span></h2>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>The BitDev Studio is a premier full-service digital agency crafting bespoke, high-performance websites and brand identities across all industries — Real Estate, Fashion, E-Commerce, Corporate, Tech, and beyond. Whatever type of website you need, you name it, and we build it for you.</p>
+          <p>We combine <strong>visual strategy, identity design, UX direction and full-stack website execution</strong> into one seamless, elevated process.</p>
+          <p>We don’t just design. We build complete digital worlds that feel intentional, modern, and aligned with your brand’s essence.</p>
+        </div>
+
+        <div class="team-grid">
+          <div class="team-card" data-tilt>
+            <div class="team-card-header">
+              <div class="team-avatar-badge">HL</div>
+              <span class="team-role-tag">Creative Director</span>
+            </div>
+            <div>
+              <h3 class="team-name">Hamza Latif</h3>
+              <p class="team-bio">Brand Strategy, Creative Direction &amp; Digital Experience</p>
+            </div>
+          </div>
+
+          <div class="team-card" data-tilt>
+            <div class="team-card-header">
+              <div class="team-avatar-badge">SA</div>
+              <span class="team-role-tag">Graphic Designer</span>
+            </div>
+            <div>
+              <h3 class="team-name">Shahryar Abbasi</h3>
+              <p class="team-bio">Visual Identity Systems, Motion &amp; Brand Aesthetics</p>
+            </div>
+          </div>
+
+          <div class="team-card" data-tilt>
+            <div class="team-card-header">
+              <div class="team-avatar-badge">AA</div>
+              <span class="team-role-tag">Web Developer</span>
+            </div>
+            <div>
+              <h3 class="team-name">Ali Anwar</h3>
+              <p class="team-bio">Full-Stack Web Architecture &amp; High-Speed Backend Systems</p>
+            </div>
+          </div>
+
+          <div class="team-card" data-tilt>
+            <div class="team-card-header">
+              <div class="team-avatar-badge">JA</div>
+              <span class="team-role-tag">Web Developer</span>
+            </div>
+            <div>
+              <h3 class="team-name">Jawad Aamir</h3>
+              <p class="team-bio">Interactive UI/UX Engineering &amp; Modern Frontend Applications</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Blog Timeline -->
+  <section class="section-light" id="blog">
+    <div class="container-inner">
+      <div class="section-header">
+        <svg class="star-icon" viewBox="0 0 480 512"><path d="M471.99 334.43L336.06 256l135.93-78.43c7.66-4.42 10.28-14.2 5.86-21.86l-32.02-55.43c-4.42-7.65-14.21-10.28-21.87-5.86l-135.93 78.43V16c0-8.84-7.17-16-16.01-16h-64.04c-8.84 0-16.01 7.16-16.01 16v156.86L56.04 94.43c-7.66-4.42-17.45-1.79-21.87 5.86L2.15 155.71c-4.42 7.65-1.8 17.44 5.86 21.86L143.94 256 8.01 334.43c-7.66 4.42-10.28 14.21-5.86 21.86l32.02 55.43c4.42 7.65 14.21 10.27 21.87 5.86l135.93-78.43V496c0 8.84 7.17 16 16.01 16h64.04c8.84 0 16.01-7.16 16.01-16V339.14l135.93 78.43c7.66 4.42 17.45 1.8 21.87-5.86l32.02-55.43c4.42-7.65 1.8-17.43-5.86-21.85z"/></svg>
+        <span class="section-subtitle">BLOG</span>
+      </div>
+      <h2 class="section-title">Trends <span style="color: #808080;">&amp; Insights</span></h2>
+
+      <div class="timeline-container">
+        <!-- Blog 1 -->
+        <div class="timeline-card" data-blog-index="0" onclick="openBlogModal(0)">
+          <div>
+            <div class="timeline-date-row">
+              <span class="timeline-date">2026-08-01</span>
+              <span class="blog-tag">UI/UX &amp; Conversion</span>
+            </div>
+            <h3 class="timeline-title">The Power of Strategic User Journeys: Converting Visitors into Clients</h3>
+            <p class="timeline-excerpt">Discover how intuitive navigation architecture and clear visual hierarchy turn passive website visitors into high-paying enterprise clients.</p>
+          </div>
+          <button class="btn-read-blog" onclick="openBlogModal(0); event.stopPropagation();">Read Article &rarr;</button>
+        </div>
+
+        <!-- Blog 2 -->
+        <div class="timeline-card" data-blog-index="1" onclick="openBlogModal(1)">
+          <div>
+            <div class="timeline-date-row">
+              <span class="timeline-date">2026-07-28</span>
+              <span class="blog-tag">Development</span>
+            </div>
+            <h3 class="timeline-title">Why Custom Web Engineering Beats Pre-Made Templates Every Time</h3>
+            <p class="timeline-excerpt">Why bespoke digital platforms outshine generic off-the-shelf templates in speed, SEO ranking, security, and brand authority.</p>
+          </div>
+          <button class="btn-read-blog" onclick="openBlogModal(1); event.stopPropagation();">Read Article &rarr;</button>
+        </div>
+
+        <!-- Blog 3 -->
+        <div class="timeline-card" data-blog-index="2" onclick="openBlogModal(2)">
+          <div>
+            <div class="timeline-date-row">
+              <span class="timeline-date">2026-07-24</span>
+              <span class="blog-tag">Performance &amp; SEO</span>
+            </div>
+            <h3 class="timeline-title">Optimizing Website Speed: How 1 Second Drives 27% Higher Conversion</h3>
+            <p class="timeline-excerpt">Speed is no longer just a technical luxury—it is the foundational metric for conversion rates, user retention, and organic Google rankings.</p>
+          </div>
+          <button class="btn-read-blog" onclick="openBlogModal(2); event.stopPropagation();">Read Article &rarr;</button>
+        </div>
+
+        <!-- Blog 4 -->
+        <div class="timeline-card" data-blog-index="3" onclick="openBlogModal(3)">
+          <div>
+            <div class="timeline-date-row">
+              <span class="timeline-date">2026-07-20</span>
+              <span class="blog-tag">Cross-Industry UX</span>
+            </div>
+            <h3 class="timeline-title">Designing Across Diverse Markets: Real Estate, Tech, E-Commerce &amp; Beyond</h3>
+            <p class="timeline-excerpt">Exploring how tailored design psychology adapts to different industries while maintaining high aesthetic standards and seamless execution.</p>
+          </div>
+          <button class="btn-read-blog" onclick="openBlogModal(3); event.stopPropagation();">Read Article &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Contact Form -->
+  <section class="section-dark" id="contacts">
+    <div class="container-inner">
+      <div class="contact-grid">
+        <div class="contact-info-block">
+          <h2 class="section-title">Have a project <span style="color: #808080;">in mind?</span></h2>
+          <h3>Whether you’re looking to build a stunning website, boost your brand, or drive measurable results, we’re here to help.</h3>
+        </div>
+
+        <div class="form-card">
+          <form id="contact-form" class="elementor-form">
+            <div id="form-status-msg" class="form-status-alert" style="display: none;"></div>
+
+            <div class="form-group">
+              <label class="form-label" for="form-name">Name *</label>
+              <input type="text" id="form-name" class="form-input" placeholder="Your Name" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="form-email">Email *</label>
+              <input type="email" id="form-email" class="form-input" placeholder="Your Email Address" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Interested in</label>
+              <div class="checkbox-group">
+                <label class="checkbox-option"><input type="checkbox" value="Full_experience" checked> Full Brand &amp; Web Experience</label>
+                <label class="checkbox-option"><input type="checkbox" value="Web_design"> Custom UI/UX Web Design</label>
+                <label class="checkbox-option"><input type="checkbox" value="Full_development"> Full-Stack Web Development</label>
+                <label class="checkbox-option"><input type="checkbox" value="Ecommerce"> E-Commerce &amp; Online Store</label>
+                <label class="checkbox-option"><input type="checkbox" value="SEO_speed"> SEO &amp; Speed Optimization</label>
+                <label class="checkbox-option"><input type="checkbox" value="Support"> Website Maintenance &amp; Support</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="form-budget">Estimated Budget</label>
+              <select id="form-budget" class="form-select">
+                <option value="1K">&lt; $1,000</option>
+                <option value="1-3K" selected>$1,000 - $3,000</option>
+                <option value="3-5K">$3,000 - $5,000</option>
+                <option value="5-10K">$5,000 - $10,000</option>
+                <option value="10K+">$10,000+</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="form-message">Message</label>
+              <textarea id="form-message" class="form-textarea" rows="4" placeholder="Tell us about your website goals..."></textarea>
+            </div>
+
+            <button type="submit" id="btn-submit-form" class="btn-submit">Send Proposal Request</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <a href="#" class="header-brand-link">
+              <svg viewBox="0 0 480 512" style="width: 26px; height: 26px; fill: #ffffff; flex-shrink: 0;"><path d="M471.99 334.43L336.06 256l135.93-78.43c7.66-4.42 10.28-14.2 5.86-21.86l-32.02-55.43c-4.42-7.65-14.21-10.28-21.87-5.86l-135.93 78.43V16c0-8.84-7.17-16-16.01-16h-64.04c-8.84 0-16.01 7.16-16.01 16v156.86L56.04 94.43c-7.66-4.42-17.45-1.79-21.87 5.86L2.15 155.71c-4.42 7.65-1.8 17.44 5.86 21.86L143.94 256 8.01 334.43c-7.66 4.42-10.28 14.21-5.86 21.86l32.02 55.43c4.42 7.65 14.21 10.27 21.87 5.86l135.93-78.43V496c0 8.84 7.17 16 16.01 16h64.04c8.84 0 16.01-7.16 16.01-16V339.14l135.93 78.43c7.66 4.42 17.45 1.8 21.87-5.86l32.02-55.43c4.42-7.65 1.8-17.43-5.86-21.85z"/></svg>
+              <span class="header-brand-title">BitDev</span>
+            </a>
+          </div>
+          <p style="font-size: 14px; color: var(--text-muted); margin-top: 10px; line-height: 1.5;">The BitDev Studio — Crafting Bespoke High-Performance Digital Experiences.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-subheading">Quick Links</h4>
+          <ul class="footer-links-list">
+            <li><a href="#about">About Studio</a></li>
+            <li><a href="#services">Our Services</a></li>
+            <li><a href="#works">Featured Projects</a></li>
+            <li><a href="#blog">Blog &amp; Insights</a></li>
+            <li><a href="#contacts">Get Proposal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-subheading">Contact</h4>
+          <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
+            The BitDev Studio Ltd.<br>
+            Website: <a href="https://bitdev.site" target="_blank" style="color: var(--accent-lime); text-decoration: none;">bitdev.site</a><br>
+            Email: hello@bitdev.site<br>
+            Available Worldwide (24/7 Remote)
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-subheading">Follow</h4>
+          <div class="social-links">
+            <a href="https://www.instagram.com/visualidentity.studio" target="_blank" class="social-icon-btn" aria-label="Instagram">
+              <svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/milda-style/" target="_blank" class="social-icon-btn" aria-label="LinkedIn">
+              <svg viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyright-bar">
+        <span>&copy;2026. All rights reserved.</span>
+        <span>The BitDev Studio</span>
+      </div>
+    </div>
+  <!-- Interactive Blog Reader Modal -->
+  <div id="blog-modal" class="blog-modal-backdrop" aria-hidden="true">
+    <div class="blog-modal-dialog">
+      <button id="modal-close-btn" class="blog-modal-close" aria-label="Close modal">&times;</button>
+      <div class="blog-modal-meta">
+        <span id="modal-blog-tag" class="blog-tag">Category</span>
+        <span id="modal-blog-date" class="blog-modal-date">Date</span>
+      </div>
+      <h2 id="modal-blog-title" class="blog-modal-title">Blog Title</h2>
+      <div class="blog-modal-author-row">
+        <span>Written by <strong>BitDev Editorial Team</strong></span>
+        <span>⏱ 4 min read</span>
+      </div>
+      <div id="modal-blog-body" class="blog-modal-body">
+        <!-- Injected via JavaScript -->
+      </div>
+      <div class="blog-modal-footer">
+        <a href="#contacts" class="btn-proposal modal-cta-btn" id="modal-cta-link">Book a Project Consultation</a>
+      </div>
+  </div>
+
+  <script>
+    const blogArticles = [
+      {
+        title: "The Power of Strategic User Journeys: Converting Visitors into Clients",
+        date: "2026-08-01",
+        tag: "UI/UX & Conversion",
+        body: "<p>Designing a high-converting website goes far beyond surface-level aesthetics. Every color choice, button placement, and typography hierarchy plays a crucial role in shaping the user's journey.</p><p>At BitDev Studio, we engineer user flows that lead visitors naturally toward conversion. By removing friction points, optimizing loading performance, and establishing trust through clean visual proof, your website transforms into an automated 24/7 client acquisition engine across Real Estate, E-Commerce, Corporate, and Tech sectors.</p><p><strong>Key Takeaways:</strong></p><ul style='margin-left:20px;margin-top:10px;'><li>Establish clear visual hierarchy above the fold.</li><li>Reduce interactive friction and redundant form fields.</li><li>Leverage dynamic social proof near key decision touchpoints.</li></ul>"
+      },
+      {
+        title: "Why Custom Web Engineering Beats Pre-Made Templates Every Time",
+        date: "2026-07-28",
+        tag: "Development",
+        body: "<p>Off-the-shelf templates often come bloated with thousands of lines of unused code, slow loading scripts, and rigid structures that limit your brand's growth.</p><p>Bespoke web engineering ensures every line of code is written with intent. From custom WebGL 3D micro-animations to tailored CMS architectures, custom development grants your business absolute scalability, bulletproof security, and unmatched search engine visibility.</p><p><strong>Why Custom Wins:</strong></p><ul style='margin-left:20px;margin-top:10px;'><li>Zero bloated plugins or unnecessary dependencies.</li><li>100% custom brand design with no template limitations.</li><li>Sub-second page load times out of the box.</li></ul>"
+      },
+      {
+        title: "Optimizing Website Speed: How 1 Second Drives 27% Higher Conversion",
+        date: "2026-07-24",
+        tag: "Performance & SEO",
+        body: "<p>Studies show that over 53% of mobile users abandon a website if it takes longer than 3 seconds to load. Modern web users demand instantaneous responsiveness.</p><p>By leveraging asset optimization, lazy-loading image pipelines, clean CSS, and edge CDN delivery, BitDev Studio ensures your platform loads in under a single second, maximizing visitor retention and search engine dominance.</p><p>When pages load instantaneously, user engagement spikes, dwell time increases, and overall revenue conversion improves drastically.</p>"
+      },
+      {
+        title: "Designing Across Diverse Markets: Real Estate, Tech, E-Commerce & Beyond",
+        date: "2026-07-20",
+        tag: "Cross-Industry UX",
+        body: "<p>Every industry possesses unique audience expectations and emotional triggers. Real estate buyers seek prestige and high-resolution spatial clarity; tech founders prioritize sleek innovation and feature clarity; e-commerce platforms demand seamless checkout speed.</p><p>A multi-disciplinary design approach synthesizes these industry-specific principles into bespoke web solutions tailored specifically to your target demographic.</p><p>Whether launching a corporate portal or a luxury digital product, tailoring the user experience to market expectations creates instant trust.</p>"
+      }
+    ];
+
+    function openBlogModal(idx) {
+      const item = blogArticles[idx];
+      if (!item) return;
+      document.getElementById('modal-blog-tag').textContent = item.tag;
+      document.getElementById('modal-blog-date').textContent = item.date;
+      document.getElementById('modal-blog-title').textContent = item.title;
+      document.getElementById('modal-blog-body').innerHTML = item.body;
+      
+      const modal = document.getElementById('blog-modal');
+      if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeBlogModal() {
+      const modal = document.getElementById('blog-modal');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const closeBtn = document.getElementById('modal-close-btn');
+      if (closeBtn) closeBtn.onclick = closeBlogModal;
+
+      const modal = document.getElementById('blog-modal');
+      if (modal) {
+        modal.onclick = function(e) {
+          if (e.target === modal) closeBlogModal();
+        };
+      }
+
+      const cta = document.getElementById('modal-cta-link');
+      if (cta) cta.onclick = closeBlogModal;
+
+      // Animated Counter Observer for Stat Cards & Metric Numbers
+      const counterElements = document.querySelectorAll('.stat-number, .metric-num');
+      if (counterElements.length > 0) {
+        const animateCounter = function(el) {
+          if (el.getAttribute('data-running') === 'true') return;
+          el.setAttribute('data-running', 'true');
+
+          const target = parseInt(el.getAttribute('data-target'), 10);
+          if (isNaN(target)) return;
+
+          const prefix = el.getAttribute('data-prefix') || '';
+          const suffix = el.getAttribute('data-suffix') || '';
+          let current = 0;
+          const duration = 1500;
+          const startTime = performance.now();
+
+          const step = function(now) {
+            const progress = Math.min((now - startTime) / duration, 1);
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            current = Math.floor(easeOut * target);
+
+            el.textContent = prefix + current + suffix;
+
+            if (progress < 1) {
+              requestAnimationFrame(step);
+            } else {
+              el.textContent = prefix + target + suffix;
+              el.removeAttribute('data-running');
+            }
+          };
+          requestAnimationFrame(step);
+        };
+
+        const counterObserver = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              animateCounter(entry.target);
+            }
+          });
+        }, { threshold: 0.05 });
+
+        counterElements.forEach(function(num) {
+          counterObserver.observe(num);
+        });
+      }
+    });
+  </script>
+
+  <script src="hero-webgl.js?v=14"></script>
+  <script src="main.js?v=14"></script>
+</body>
+</html>
